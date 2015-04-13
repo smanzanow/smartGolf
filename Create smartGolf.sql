@@ -4,7 +4,8 @@ CREATE TABLE Jugardor (
 Id INT  UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 Nombre VARCHAR(30) NOT NULL,
 Apellidos VARCHAR(30) NOT NULL,
-Clave VARCHAR(10) NOT NULL
+Clave VARCHAR(10) NOT NULL,
+EsAdmin BOOL NOT NULL
 )
 
 CREATE TABLE Campeonato (
@@ -19,37 +20,38 @@ Nombre VARCHAR(30)
 
 CREATE TABLE hoyo (
 Id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-IdCancha INT,
+IdCancha INT UNSIGNED,
 Par INT,
 Numero INT,
-FOREING KEY (IdCancha) REFERENCES Cancha(Id)
+FOREIGN KEY (IdCancha) REFERENCES Cancha(Id)
 )
 
 CREATE TABLE Feacha (
 Id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-IdCampeonato INT,
+IdCampeonato INT UNSIGNED,
 Numero INT,
-IdPrimeraCancha INT,
-IdSegundaCancha INT,
-FOREING KEY (IdCampeonato) REFERENCES Campeonato(Id),
-FOREING KEY (IdPrimeraCancha) REFERENCES Cancha(Id),
-FOREING KEY (IdSegundaCancha) REFERENCES Cancha(Id)
+IdPrimeraCancha INT UNSIGNED,
+IdSegundaCancha INT UNSIGNED,
+FOREIGN KEY (IdCampeonato) REFERENCES Campeonato(Id),
+FOREIGN KEY (IdPrimeraCancha) REFERENCES Cancha(Id),
+FOREIGN KEY (IdSegundaCancha) REFERENCES Cancha(Id)
 )
 
 CREATE TABLE juego (
 Id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-IdJugador INT,
-IdControlador INT,
-IdFecha INT,
-FOREING KEY (IdJugador) REFERENCES Jugardor(Id),
-FOREING KEY (IdControlador) REFERENCES Jugardor(Id),
-FOREING KEY (IdFecha) REFERENCES Feacha(Id)
+IdJugador INT UNSIGNED,
+IdControlador INT UNSIGNED,
+IdFecha INT UNSIGNED,
+FOREIGN KEY (IdJugador) REFERENCES Jugardor(Id),
+FOREIGN KEY (IdControlador) REFERENCES Jugardor(Id),
+FOREIGN KEY (IdFecha) REFERENCES Feacha(Id)
 )
 
 CREATE TABLE Puntuacion (
-	IdJuego INT PRIMARY KEY,
-	IdHoyo INT PRIMARY KEY,
+	IdJuego INT UNSIGNED,
+	IdHoyo INT UNSIGNED,
 	Golpes INT,
-	FOREING KEY (IdHoyo) REFERENCES hoyo(Id),
-	FOREING KEY (IdJuego) REFERENCES juego(Id)
+	PRIMARY KEY (IdJuego, IdHoyo),
+	FOREIGN KEY (IdHoyo) REFERENCES hoyo(Id),
+	FOREIGN KEY (IdJuego) REFERENCES juego(Id)
 )
