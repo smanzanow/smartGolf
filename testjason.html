@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+        <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+
+        <title>Smart Golf - Las Brisas de Santo Domingo</title>
+
+    <link href="bootstrap-3.2.0-dist/bootstrap-3.2.0-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap-3.2.0-dist/bootstrap-3.2.0-dist/css/normalize.css" rel="stylesheet">
+    <link href="bootstrap-3.2.0-dist/bootstrap-3.2.0-dist/css/dashboard.css" rel="stylesheet">    
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+  </head>
+<body>
+<table class="table" id="tb">
+    <tr>
+        <td>
+            Jugador
+        </td>
+        <td>
+            Hoyos
+        </td>
+        <td>
+            Puntos
+        </td>
+                <td>
+            Jugador
+        </td>
+        <td>
+            Hoyos
+        </td>
+        <td>
+            Puntos
+        </td>
+                <td>
+            Jugador
+        </td>
+        <td>
+            Hoyos
+        </td>
+        <td>
+            Puntos
+        </td>
+    </tr>
+
+</table>
+    <script>
+    $.ajax({
+        url: "http://localhost/smartGolf/json.php",
+        dataType: 'jsonp',
+        success: function (data) {
+            for (var a =0; a<data.length; a++){
+            $("#tb").append( "<tr><td>"+data[a].nombre+"</td> <td>"+data[a].hoyos+"</td> <td>"+data[a].puntos+"</td> </tr>" );
+            }
+        }
+
+});
+</script>
+
+</body>
